@@ -6,19 +6,19 @@
 	ModuleVersion = '1.0.0'
 	
 	# ID used to uniquely identify this module
-	GUID = 'a6d2cb98-1996-4368-a393-2542d0f3ec6f'
+	GUID = '85a236b4-7360-4ef7-ae99-8813cddf632f'
 	
 	# Author of this module
 	Author = 'Friedrich Weinmann'
 	
 	# Company or vendor of this module
-	CompanyName = 'Microsoft'
+	CompanyName = ' '
 	
 	# Copyright statement for this module
 	Copyright = 'Copyright (c) 2020 Friedrich Weinmann'
 	
 	# Description of the functionality provided by this module
-	Description = 'Resolve principals from ambiguous input across multiple domains & forests'
+	Description = 'Resolves Cross-Domain Principal resolution'
 	
 	# Minimum version of the Windows PowerShell engine required by this module
 	PowerShellVersion = '5.0'
@@ -39,7 +39,14 @@
 	# FormatsToProcess = @('xml\Principal.Format.ps1xml')
 	
 	# Functions to export from this module
-	FunctionsToExport = ''
+	FunctionsToExport = @(
+		'Clear-DomainCache'
+		'Clear-PrincipalCache'
+		'Get-Domain'
+		'Register-Domain'
+		'Resolve-Domain'
+		'Resolve-Principal'
+	)
 	
 	# Cmdlets to export from this module
 	CmdletsToExport = ''
