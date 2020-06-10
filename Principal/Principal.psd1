@@ -70,19 +70,19 @@
 		PSData = @{
 			
 			# Tags applied to this module. These help with module discovery in online galleries.
-			# Tags = @()
+			Tags = @('activedirectory', 'domain', 'admf', 'principal')
 			
 			# A URL to the license for this module.
-			# LicenseUri = ''
+			LicenseUri = 'https://github.com/ActiveDirectoryManagementFramework/Principal/blob/master/LICENSE'
 			
 			# A URL to the main website for this project.
-			# ProjectUri = ''
+			ProjectUri = 'https://admf.one'
 			
 			# A URL to an icon representing this module.
 			# IconUri = ''
 			
 			# ReleaseNotes of this module
-			# ReleaseNotes = ''
+			ReleaseNotes = 'https://github.com/ActiveDirectoryManagementFramework/DomainManagement/blob/master/Principal/changelog.md'
 			
 		} # End of PSData hashtable
 		
