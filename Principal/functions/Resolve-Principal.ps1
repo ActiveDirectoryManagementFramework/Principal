@@ -180,7 +180,8 @@
 			elseif ($Name -as [System.Security.Principal.SecurityIdentifier])
 			{
 				$data.UserName = $Name
-				$domainName = $Name
+				$data.Type = 'SID'
+				if (($Name -as [System.Security.Principal.SecurityIdentifier]).AccountDomainSid) { $domainName = $Name }
 			}
 			#endregion Name notation Cases - resolve domain name and username
 			
@@ -260,6 +261,12 @@
 		if ($script:principals.UserPrincipalName[$Name]) { return $script:principals.UserPrincipalName[$Name] | ConvertTo-Output -OutputType $OutputType }
 		if ($script:principals.NTAccount[$Name]) { return $script:principals.NTAccount[$Name] | ConvertTo-Output -OutputType $OutputType }
 		
+		if (-not ($Name -as [System.Security.Principal.SecurityIdentifier]))
+		{
+			try { $Name = ([System.Security.Principal.NTAccount]$Name).Translate([System.Security.Principal.SecurityIdentifier]) }
+			catch { }
+		}
+		
 		if ($OutputType -eq 'SID' -and $Name -as [System.Security.Principal.SecurityIdentifier])
 		{
 			return $Name -as [System.Security.Principal.SecurityIdentifier]
@@ -275,6 +282,7 @@
 		
 		switch ($domainInfo.Type)
 		{
+			#region UPN Based Resolution
 			'UPN'
 			{
 				$adObject = $null
@@ -288,6 +296,24 @@
 				}
 				$adObject | Convert-ADPrincipal -DomainInfo $domainInfo | ConvertTo-Output -OutputType $OutputType
 			}
+			#endregion UPN Based Resolution
+			
+			#region SID Based Resolution
+			'SID'
+			{
+				$adObject = $null
+				$adObject = Get-ADObject2 -DomainInfoObject $domainInfo.Domain -LdapFilter "(objectSID=$($domainInfo.UserName))" -Properties $principalProperties -Parameters $parameters
+				
+				if (-not $adObject)
+				{
+					Write-PSFMessage -Level Warning -String 'Resolve-Principal.Resolve.Principal.Error' -StringValues $Name
+					Write-Error "Unable to resolve principal $Name"
+					return
+				}
+				$adObject | Convert-ADPrincipal -DomainInfo $domainInfo.Domain | ConvertTo-Output -OutputType $OutputType
+			}
+			#endregion SID Based Resolution
+			
 			#region Default Workflow
 			default
 			{
