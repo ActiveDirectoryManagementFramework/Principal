@@ -3,7 +3,7 @@
 	RootModule = 'Principal.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.0'
+	ModuleVersion = '1.0.1'
 	
 	# ID used to uniquely identify this module
 	GUID = '85a236b4-7360-4ef7-ae99-8813cddf632f'
@@ -18,15 +18,14 @@
 	Copyright = 'Copyright (c) 2020 Friedrich Weinmann'
 	
 	# Description of the functionality provided by this module
-	Description = 'Resolves Cross-Domain Principal resolution'
+	Description = 'Offers cached Cross-Domain Principal resolution'
 	
 	# Minimum version of the Windows PowerShell engine required by this module
-	PowerShellVersion = '5.0'
+	PowerShellVersion = '5.1'
 	
-	# Modules that must be imported into the global environment prior to importing
-	# this module
+	# Modules that must be imported into the global environment prior to importing this module
 	RequiredModules = @(
-		@{ ModuleName='PSFramework'; ModuleVersion='1.1.59' }
+		@{ ModuleName='PSFramework'; ModuleVersion='1.13.426' }
 	)
 	
 	# Assemblies that must be loaded prior to importing this module
@@ -49,13 +48,13 @@
 	)
 	
 	# Cmdlets to export from this module
-	CmdletsToExport = ''
+	CmdletsToExport = @()
 	
 	# Variables to export from this module
-	VariablesToExport = ''
+	VariablesToExport = @()
 	
 	# Aliases to export from this module
-	AliasesToExport = ''
+	AliasesToExport = @()
 	
 	# List of all modules packaged with this module
 	ModuleList = @()
