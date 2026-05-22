@@ -1,6 +1,5 @@
-﻿function Clear-PrincipalCache
-{
-<#
+﻿function Clear-PrincipalCache {
+	<#
 	.SYNOPSIS
 		Clears the principal cache.
 	
@@ -18,14 +17,15 @@
 		Clears the principal cache.
 #>
 	[CmdletBinding()]
-	Param (
+	param (
 	
 	)
 	
-	process
-	{
+	process {
 		$script:principals = @{
-			SID = @{ }
+			Domains           = @{ }
+			NTAccount         = @{ }
+			SID               = @{ }
 			UserPrincipalName = @{ }
 		}
 	}
